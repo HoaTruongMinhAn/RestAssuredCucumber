@@ -11,6 +11,7 @@ import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.junit.Assert;
+import resources.APIResources;
 import resources.TestDataBuilder;
 import resources.Utils;
 
@@ -34,10 +35,11 @@ public class StepDefinition extends Utils {
                 .body(testDataBuilder.buildAddPlacePayload(name, language, address));
     }
 
-    @When("User calls {string} with POST request")
-    public void user_calls_with_post_request(String string) {
+    @When("User calls {string} with {string} request")
+    public void userCallsWithRequest(String apiName, String httpMethod) {
+        APIResources apiResource = APIResources.valueOf(apiName);
         response = requestSpecification.when()
-                .post("maps/api/place/add/json");
+                .request(httpMethod, apiResource.getResource());
     }
 
     @Then("API call is successful with status code {int}")
