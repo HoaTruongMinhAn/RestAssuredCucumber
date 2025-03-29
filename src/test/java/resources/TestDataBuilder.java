@@ -7,14 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TestDataBuilder {
-    public GooglePlace buildAddPlacePayload() {
+    public GooglePlace buildAddPlacePayload(String name, String language, String address) {
         GooglePlace googlePlace = new GooglePlace();
         googlePlace.setAccuracy(55);
-        googlePlace.setName("Frontline house");
+        googlePlace.setName(name);
         googlePlace.setPhoneNumber("(+91) 983 893 3937");
-        googlePlace.setAddress("29, side layout, cohen 09");
+        googlePlace.setAddress(address);
         googlePlace.setWebsite("http://google.com");
-        googlePlace.setLanguage("French-IN");
+        googlePlace.setLanguage(language);
 
         GoogleLocation googleLocation = new GoogleLocation();
         googleLocation.setLat(-38.383494);

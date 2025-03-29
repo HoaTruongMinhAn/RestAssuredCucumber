@@ -24,14 +24,14 @@ public class StepDefinition extends Utils {
     JsonPath jsonPath;
     TestDataBuilder testDataBuilder = new TestDataBuilder();
 
-    @Given("Add Place API")
-    public void add_place_api() {
+    @Given("Add Place API with {string} {string} {string}")
+    public void addPlaceAPIWith(String name, String language, String address) {
         RequestSpecification req = new Utils().getRequestSpecification("Add Place API");
         System.out.println("\n########### Request ###########");
         requestSpecification = given()
                 .log().all()
                 .spec(req)
-                .body(testDataBuilder.buildAddPlacePayload());
+                .body(testDataBuilder.buildAddPlacePayload(name, language, address));
     }
 
     @When("User calls {string} with POST request")
