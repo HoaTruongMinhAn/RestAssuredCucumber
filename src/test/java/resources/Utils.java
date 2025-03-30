@@ -1,9 +1,12 @@
 package resources;
 
+import files.CommonMethods;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
 import java.io.FileInputStream;
@@ -13,25 +16,23 @@ import java.io.PrintStream;
 import java.util.Properties;
 
 public class Utils {
-    public static RequestSpecification requestSpecification;
-    private static PrintStream log;
+    //    private RequestSpecification requestSpecification;
+    private PrintStream log;
 
     public RequestSpecification getRequestSpecification(String stepText) {
-        if (requestSpecification == null) {
-            try {
-                log = new PrintStream(new FileOutputStream("logging.txt", true));
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
-            }
-
-            requestSpecification = new RequestSpecBuilder()
-                    .setBaseUri(getGlobalValue("baseURL"))
-                    .addQueryParam("key", "qaclick123")
-                    .setContentType(ContentType.JSON)
-                    .build();
+        try {
+            log = new PrintStream(new FileOutputStream("logging.txt", true));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
-        return given().spec(requestSpecification)
+        RequestSpecification spec = new RequestSpecBuilder()
+                .setBaseUri(getGlobalValue("baseURL"))
+                .addQueryParam("key", "qaclick123")
+                .setContentType(ContentType.JSON)
+                .build();
+
+        return given().spec(spec)
                 .filter(new CustomRequestLoggingFilter(log, stepText))
                 .filter(RequestLoggingFilter.logRequestTo(log))
                 .filter(new CustomResponseLoggingFilter(log, stepText))
@@ -54,5 +55,10 @@ public class Utils {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public String getResponseValue(Response response, String keyPath) {
+        JsonPath jsonPath = CommonMethods.rawToJson(response.asString());
+        return jsonPath.get(keyPath).toString();
     }
 }

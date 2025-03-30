@@ -1,5 +1,4 @@
-
-####### Request Add Place API - 2025-03-29 21:06:00
+####### Request Add Place API - 2025-03-30 17:43:54
 Request method:	POST
 Request URI:	https://rahulshettyacademy.com/maps/api/place/add/json?key=qaclick123
 Proxy:			<none>
@@ -29,9 +28,9 @@ Body:
     "language": "French-IN"
 }
 
-####### Response Add Place API - 2025-03-29 21:06:00
+####### Response Add Place API - 2025-03-30 17:43:54
 HTTP/1.1 200 OK
-Date: Sat, 29 Mar 2025 14:06:08 GMT
+Date: Sun, 30 Mar 2025 10:44:02 GMT
 Server: Apache/2.4.52 (Ubuntu)
 Access-Control-Allow-Origin: *
 Access-Control-Allow-Methods: POST
@@ -44,13 +43,55 @@ Content-Type: application/json;charset=UTF-8
 
 {
     "status": "OK",
-    "place_id": "fe4bac60c76b7bf3015aed4e7e47428b",
+    "place_id": "a41f0a38ba393669a2a8d8496a8b3346",
     "scope": "APP",
-    "reference": "fbd6125cdc1d31100f01573d321517d9fbd6125cdc1d31100f01573d321517d9",
-    "id": "fbd6125cdc1d31100f01573d321517d9"
+    "reference": "7fc2545b6ba2d860492640ac67cf183c7fc2545b6ba2d860492640ac67cf183c",
+    "id": "7fc2545b6ba2d860492640ac67cf183c"
 }
 
-####### Request Add Place API - 2025-03-29 21:06:03
+####### Request Get Place API - 2025-03-30 17:43:56
+Request method:	GET
+Request URI:	https://rahulshettyacademy.com/maps/api/place/get/json?key=qaclick123&place_id=a41f0a38ba393669a2a8d8496a8b3346
+Proxy:			<none>
+Request params:	<none>
+Query params:	key=qaclick123
+				place_id=a41f0a38ba393669a2a8d8496a8b3346
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+
+####### Response Get Place API - 2025-03-30 17:43:56
+HTTP/1.1 200 OK
+Date: Sun, 30 Mar 2025 10:44:03 GMT
+Server: Apache/2.4.52 (Ubuntu)
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: POST
+Access-Control-Max-Age: 3600
+Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With
+Content-Length: 239
+Keep-Alive: timeout=5, max=100
+Connection: Keep-Alive
+Content-Type: application/json;charset=UTF-8
+
+{
+    "location": {
+        "latitude": "-38.383494",
+        "longitude": "33.427362"
+    },
+    "accuracy": "55",
+    "name": "Frontline house",
+    "phone_number": "",
+    "address": "29, side layout, cohen 09",
+    "types": "shoe park,shop",
+    "website": "http://google.com",
+    "language": "French-IN"
+}
+
+####### Request Add Place API - 2025-03-30 17:43:57
 Request method:	POST
 Request URI:	https://rahulshettyacademy.com/maps/api/place/add/json?key=qaclick123
 Proxy:			<none>
@@ -80,9 +121,9 @@ Body:
     "language": "Vietnamese"
 }
 
-####### Response Add Place API - 2025-03-29 21:06:03
+####### Response Add Place API - 2025-03-30 17:43:57
 HTTP/1.1 200 OK
-Date: Sat, 29 Mar 2025 14:06:10 GMT
+Date: Sun, 30 Mar 2025 10:44:05 GMT
 Server: Apache/2.4.52 (Ubuntu)
 Access-Control-Allow-Origin: *
 Access-Control-Allow-Methods: POST
@@ -95,51 +136,50 @@ Content-Type: application/json;charset=UTF-8
 
 {
     "status": "OK",
-    "place_id": "9848e4eaed298b394e9bb7114fc4a91e",
+    "place_id": "4286d1bf7790924036cbc094ef0c6e31",
     "scope": "APP",
-    "reference": "79fa06fec4d86f7114dbd571f92214e879fa06fec4d86f7114dbd571f92214e8",
-    "id": "79fa06fec4d86f7114dbd571f92214e8"
+    "reference": "80472a79f55885d7f28513973ebbd20680472a79f55885d7f28513973ebbd206",
+    "id": "80472a79f55885d7f28513973ebbd206"
 }
 
-####### Request Add Place API - 2025-03-29 21:06:04
+####### Request Get Place API - 2025-03-30 17:43:58
 Request method:	GET
-Request URI:	https://rahulshettyacademy.com/maps/api/place/get/json?key=qaclick123
+Request URI:	https://rahulshettyacademy.com/maps/api/place/get/json?key=qaclick123&place_id=4286d1bf7790924036cbc094ef0c6e31
 Proxy:			<none>
 Request params:	<none>
 Query params:	key=qaclick123
+				place_id=4286d1bf7790924036cbc094ef0c6e31
 Form params:	<none>
 Path params:	<none>
 Headers:		Accept=*/*
 				Content-Type=application/json
 Cookies:		<none>
 Multiparts:		<none>
-Body:
-{
-    "location": {
-        "lat": -38.383494,
-        "lng": 33.427362
-    },
-    "accuracy": 55,
-    "name": "test name 1",
-    "phoneNumber": "(+91) 983 893 3937",
-    "address": "nguyen dinh chieu, Dictrict 1",
-    "types": [
-        "shoe park",
-        "shop"
-    ],
-    "website": "http://google.com",
-    "language": "Vietnamese"
-}
+Body:			<none>
 
-####### Response Add Place API - 2025-03-29 21:06:04
+####### Response Get Place API - 2025-03-30 17:43:58
 HTTP/1.1 200 OK
-Date: Sat, 29 Mar 2025 14:06:10 GMT
+Date: Sun, 30 Mar 2025 10:44:05 GMT
 Server: Apache/2.4.52 (Ubuntu)
 Access-Control-Allow-Origin: *
 Access-Control-Allow-Methods: POST
 Access-Control-Max-Age: 3600
 Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With
-Content-Length: 0
+Content-Length: 240
 Keep-Alive: timeout=5, max=100
 Connection: Keep-Alive
-Content-Type: application/json; charset=UTF-8
+Content-Type: application/json;charset=UTF-8
+
+{
+    "location": {
+        "latitude": "-38.383494",
+        "longitude": "33.427362"
+    },
+    "accuracy": "55",
+    "name": "test name 1",
+    "phone_number": "",
+    "address": "nguyen dinh chieu, Dictrict 1",
+    "types": "shoe park,shop",
+    "website": "http://google.com",
+    "language": "Vietnamese"
+}
