@@ -19,6 +19,8 @@ import resources.Utils;
 import static io.restassured.RestAssured.given;
 
 public class StepDefinition extends Utils {
+    //    private static String placeId;
+    public static ThreadLocal<String> placeId = new ThreadLocal<String>();
     private RequestSpecification requestSpecification;
     private ResponseSpecification responseSpecification;
     private Response response;
@@ -26,7 +28,6 @@ public class StepDefinition extends Utils {
     private JsonPath jsonPath;
     private TestDataBuilder testDataBuilder = new TestDataBuilder();
     private GooglePlace googlePlace;
-    private String placeId;
 
     @Given("Add Place API with {string} {string} {string}")
     public void addPlaceAPIWith(String name, String language, String address) {
@@ -45,10 +46,10 @@ public class StepDefinition extends Utils {
                 .request(httpMethod, apiResource.getResource());
     }
 
-    @Then("API call is successful with status code {int}")
-    public void api_call_is_successful_with_status_code(Integer int1) {
+/*    @Then("API call is successful with status code {int}")
+    public void api_call_is_successful_with_status_code(Integer expectedStatusCode) {
         responseSpecification = new ResponseSpecBuilder()
-                .expectStatusCode(200)
+                .expectStatusCode(expectedStatusCode)
                 .expectContentType("application/json")
                 .build();
 
@@ -58,6 +59,19 @@ public class StepDefinition extends Utils {
         jsonPath = CommonMethods.rawToJson(validatableResponse.extract().asString());
         System.out.println("\nResponse body: ");
         jsonPath.prettyPrint();
+    }*/
+
+    @Then("API call is successful with status code {int} and content type {string}")
+    public void apiCallIsSuccessfulWithStatusCodeAndContentType(int expectedStatusCode, String expectedContentType) {
+        responseSpecification = new ResponseSpecBuilder()
+                .expectStatusCode(expectedStatusCode)
+                .expectContentType(expectedContentType)
+                .build();
+
+        System.out.println("\n########### Response ###########");
+        validatableResponse = response.then().spec(responseSpecification).log().all();
+
+        jsonPath = CommonMethods.rawToJson(validatableResponse.extract().asString());
     }
 
     @Then("{string} in response body is {string}")
@@ -69,11 +83,12 @@ public class StepDefinition extends Utils {
     @When("GetPlaceAPI with the created place_id")
     public void getPlaceApiWithTheCreatedPlace_id() {
         System.out.println("\n########### Request GetPlaceAPI ###########");
-        placeId = getResponseValue(response, "place_id");
+//        placeId = getResponseValue(response, "place_id");
+        placeId.set(getResponseValue(response, "place_id"));
         requestSpecification = given()
                 .log().all()
                 .spec(getRequestSpecification("Get Place API"))
-                .queryParams("place_id", placeId);
+                .queryParams("place_id", placeId.get());
     }
 
     @Then("Verify place_Id created maps to {string} {string} {string} using {string}")
@@ -89,8 +104,6 @@ public class StepDefinition extends Utils {
         validatableResponse = response.then().spec(responseSpecification).log().all();
 
         jsonPath = CommonMethods.rawToJson(validatableResponse.extract().asString());
-        System.out.println("\nResponse body: ");
-        jsonPath.prettyPrint();
 
         //Pojo
         String actualName = jsonPath.getString("name");
@@ -99,9 +112,18 @@ public class StepDefinition extends Utils {
         Assert.assertEquals(actualName, name);
         Assert.assertEquals(actualLanguage, language);
         Assert.assertEquals(actualAddress, address);
-//        Assert.assertEquals(actualName, googlePlace.getName());
-//        Assert.assertEquals(actualLanguage, googlePlace.getLanguage());
-//        Assert.assertEquals(actualAddress, googlePlace.getAddress());
     }
 
+
+    @Given("Delete Place API")
+    public void deletePlaceAPI() {
+        System.out.println("\n########### Request DeletePlaceAPI ###########");
+//        placeId = getResponseValue(response, "place_id");
+        System.out.println("buildDeletePlacePayload: " + testDataBuilder.buildDeletePlacePayload(placeId.get()));
+        requestSpecification = given()
+                .log().all()
+                .spec(getRequestSpecification("Delete Place API"))
+                .body(testDataBuilder.buildDeletePlacePayload(placeId.get()));
+
+    }
 }

@@ -28,4 +28,13 @@ public class TestDataBuilder {
 
         return googlePlace;
     }
+
+    public String buildDeletePlacePayload(String placeId) {
+        String result = """
+                {
+                    "place_id":\"""" + placeId + """
+                "
+                }""";
+        return result;
+    }
 }
