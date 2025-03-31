@@ -1,6 +1,6 @@
 Feature: Validating Place APIs
 
-  @AddPlace
+  @AddPlace @Regression
   Scenario Outline: Verify if place is successfully added using Add Place API
     Given Add Place API with "<name>" "<language>" "<address>"
     When User calls "AddPlaceAPI" with "POST" request
@@ -16,7 +16,7 @@ Feature: Validating Place APIs
       | Frontline house | French-IN  | 29, side layout, cohen 09     |
       | test name 1     | Vietnamese | nguyen dinh chieu, Dictrict 1 |
 
-  @DeletePlace
+  @DeletePlace @Regression
   Scenario: Verify if Delete Place API is working
     Given Delete Place API
     When User calls "DeletePlaceAPI" with "DELETE" request
